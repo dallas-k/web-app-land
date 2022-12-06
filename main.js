@@ -1,45 +1,20 @@
-let accessKey = "mmgaRe2jArTS%2B4%2BZ%2F3bFdLysADDBgldElPJr8bttAHStiCDJ0b1pxBpM%2FMHL%2F8Z6QwtT2Y3aRiK2WUdt6qx8xQ%3D%3D";
+"use strict";
 
-const offi_rent = {
-    url : "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcOffiRent",
-    location : encodeURIComponent('LAWD_CD'), // 5자리 코드
-    month : encodeURIComponent('DEAL_YMD') // ex)201512
-}
-const offi_trade = {
-    url : "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcOffiTrade",
-    location : encodeURIComponent('LAWD_CD'), // 5자리 코드
-    month : encodeURIComponent('DEAL_YMD') // ex)201512
-}
-const yeonrip_rent = {
-    url : "http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcRHRent",
-    location : encodeURIComponent('LAWD_CD'), // 5자리 코드
-    month : encodeURIComponent('DEAL_YMD') // ex)201512
-}
-const yeonrip_trade = {
-    url : "http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcRHTrade",
-    location : encodeURIComponent('LAWD_CD'), // 5자리 코드
-    month : encodeURIComponent('DEAL_YMD') // ex)201512
-}
-const apt_rent = {
-    url : "http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptRent",
-    location : encodeURIComponent('LAWD_CD'), // 5자리 코드
-    month : encodeURIComponent('DEAL_YMD') // ex)201512
-}
-const apt_trade = {
-    url : "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev",
-    location : encodeURIComponent('LAWD_CD'), // 5자리 코드
-    month : encodeURIComponent('DEAL_YMD') // ex)201512
-}
-const dandok_rent = {
-    url : "http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcSHRent",
-    location : encodeURIComponent('LAWD_CD'), // 5자리 코드
-    month : encodeURIComponent('DEAL_YMD') // ex)201512
-}
-const dandok_trade = {
-    url : "http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcSHTrade",
-    location : encodeURIComponent('LAWD_CD'), // 5자리 코드
-    month : encodeURIComponent('DEAL_YMD') // ex)201512
-}
+import request from 'request';
+import * as open from './data.js';
+
+let url = 'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcOffiTrade'; /*URL*/
+let queryParams = '?' + encodeURIComponent('serviceKey') + '=' +open.accessKey; /*Service Key*/
+queryParams += '&' + encodeURIComponent('LAWD_CD') + '=' + encodeURIComponent('11110'); /**/
+queryParams += '&' + encodeURIComponent('DEAL_YMD') + '=' + encodeURIComponent('201512'); /**/
+
+request(url+queryParams, (err, response, body) => {
+    if(err) throw err;
+    console.log(body);
+});
+
+
+
 
 
 // let xhr = new XMLHttpRequest();
@@ -54,16 +29,16 @@ const dandok_trade = {
 //     }
 // };
 
-let url = dandok_trade["url"];
-let query = `?${dandok_trade['location']}=`+encodeURIComponent('11110')+`&${dandok_trade['month']}=`+encodeURIComponent('201512')+'&'+encodeURIComponent('serviceKey')+`=${accessKey}`;
-console.log(url+query);
+// let url = dandok_trade["url"];
+// let query = `?${dandok_trade['location']}=`+encodeURIComponent('11110')+`&${dandok_trade['month']}=`+encodeURIComponent('201512')+'&'+encodeURIComponent('serviceKey')+`=${accessKey}`;
+// console.log(url+query);
 
-let xhr = new XMLHttpRequest();
-xhr.open('GET',url+query);
-xhr.onreadystatechange = function () {
-    if(this.readyState == 4) {
-        alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
-    }
-};
+// let xhr = new XMLHttpRequest();
+// xhr.open('GET',url+query);
+// xhr.onreadystatechange = function () {
+//     if(this.readyState == 4) {
+//         alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
+//     }
+// };
 
-xhr.send('');
+// xhr.send('');

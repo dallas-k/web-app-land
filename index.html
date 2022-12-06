@@ -10,6 +10,7 @@
 <body>
     <h1>hello API</h1>
     <div id="map" style="width:500px; height:400px;"></div>
+    <p id="sketch"></p>
 </body>
 <script>
     let container = document.getElementById('map');
@@ -19,5 +20,5 @@
     }
     let map = new kakao.maps.Map(container, options);
 </script>
-<script src="main.js"></script>
+<script type='module' src="main.js"></script>
 </html>
