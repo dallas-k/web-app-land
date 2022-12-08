@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="data"></p>
+    <script>
+        const url = 'https://apis.data.go.kr/B552657/ErmctInsttInfoInqireService/getParmacyListInfoInqire?serviceKey=mmgaRe2jArTS%2B4%2BZ%2F3bFdLysADDBgldElPJr8bttAHStiCDJ0b1pxBpM%2FMHL%2F8Z6QwtT2Y3aRiK2WUdt6qx8xQ%3D%3D&Q0=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C&Q1=%EA%B0%95%EB%82%A8%EA%B5%AC&QT=1&QN=%EC%82%BC%EC%84%B1%EC%95%BD%EA%B5%AD&ORD=NAME&pageNo=1&numOfRows=100';
+
+        const read = async () => {
+            let response = await fetch(url);
+            let t_xml = await response.text();
+
+            let parseXML = new DOMParser();
+            let xmlDoc = parseXML.parseFromString(t_xml, 'text/xml');
+            
+            let arr = [];
+            let addr = xmlDoc.getElementsByTagName('dutyAddr');
+            for(child of addr){
+                console.log(child.textContent)
+            }
+        }
+
+        read();
+
+
+
+    </script>
+</body>
+</html>

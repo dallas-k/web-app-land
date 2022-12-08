@@ -1,10 +1,10 @@
 "use strict";
 
 import request from 'request';
-import * as open from './data.js';
+import * as data from './data.js';
 
 let url = 'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcOffiTrade'; /*URL*/
-let queryParams = '?' + encodeURIComponent('serviceKey') + '=' +open.accessKey; /*Service Key*/
+let queryParams = '?' + encodeURIComponent('serviceKey') + '=' +data.accessKey; /*Service Key*/
 queryParams += '&' + encodeURIComponent('LAWD_CD') + '=' + encodeURIComponent('11110'); /**/
 queryParams += '&' + encodeURIComponent('DEAL_YMD') + '=' + encodeURIComponent('201512'); /**/
 

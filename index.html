@@ -4,21 +4,144 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cde4a15e077170739f0d2a29ff8477ee"></script>
-    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        .login_err {display:block; color:red; font-style:italic;}
+    </style>
+    <script>
+        $(function(){
+            $('#loginform').click(() => {
+                $('#loginform').load('form/loginform.html');
+            })
+        })
+    </script>
+    <title>알부자</title>
 </head>
 <body>
-    <h1>hello API</h1>
-    <div id="map" style="width:500px; height:400px;"></div>
-    <p id="sketch"></p>
+    <div class="container bg-warning">
+        <header class="header" id="main">
+            <h1>가보자</h1>
+            <div>
+                <p>마지막 업데이트 날짜</p>
+                <p>2022.12.06 09시</p>
+            </div>
+	        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                로그인
+              </button>
+              
+              <!-- The Modal -->
+              <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <form action="form/loginOk.php" method='post' onsubmit="return LoginSubmit();">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                        <h4 class="modal-title">로그인</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                
+                        <!-- Modal body -->
+                        <div class="modal-body row">
+                            <div class="col-md-6">
+                                <input type="text" name='user_id' id='user_id' placeholder="아이디">
+                                <span class="login_err" id="login_err_id"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="password" name='user_pwd' id='user_pwd' placeholder="패스워드">
+                                <span class="login_err" id="login_err_pwd"></span>
+                            </div>
+                        </div>
+                
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning" onclick="LoginSubmit()">로그인</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+        </header>
+
+        <main class="main" id="main">
+            <div class="search-box">
+                <form action="#" method="get">
+                    <input class='search-text' type="text" placeholder="단지, 지역, 지하철, 학교 검색">
+                    <button class="search-button">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div class="statistics">
+                <h2>지역별 통계 자료</h2>
+                <ul>
+                    <li><a href="">아파트</a></li>
+                    <li><a href="">원룸</a></li>
+                    <li><a href="">빌라/투룸</a></li>
+                    <li><a href="">오피스텔</a></li>
+                </ul>
+            </div>
+            <div class="map row">
+                <h2>지도에서 보기</h2>
+                <div class="buy col-sm-6">
+                    <h3>매매</h3>
+                    <ul>
+                        <li><a href="">아파트</a></li>
+                        <li><a href="">원룸</a></li>
+                        <li><a href="">빌라/투룸</a></li>
+                        <li><a href="">오피스텔</a></li>
+                    </ul>
+                </div>
+                <div class="rent col-sm-6">
+                    <h3>전/월세</h3>
+                    <ul>
+                        <li><a href="">아파트</a></li>
+                        <li><a href="">원룸</a></li>
+                        <li><a href="">빌라/투룸</a></li>
+                        <li><a href="">오피스텔</a></li>
+                    </ul>
+            </div>
+        </main>
+        
+        <footer class="footer" id="footer">
+        <div>
+            <ul>
+                <li><a href="">홈</a></li>
+                <li><a href="">지도</a></li>
+                <li><a href="">커뮤니티</a></li>
+                <li><a href="">알림</a></li>
+                <li><a href="">메뉴</a></li>
+            </ul>
+        </div>
+        </footer>     
+    </div>
+    <script>
+        const LoginSubmit = () => {
+            let id_value, pwd_value;
+            id_value = document.getElementById('user_id').value;
+            pwd_value = document.getElementById('user_pwd').value;
+
+            // ID 오류 체크
+            if(id_value.length < 4){
+                document.getElementById('login_err_id').textContent = '잘못된 ID 값입니다.';
+                return false;
+            } else {
+                document.getElementById('login_err_id').textContent = "";
+            }
+
+            // PW 오류 체크
+            if(pwd_value.length < 4){
+                document.getElementById('login_err_pwd').textContent = '잘못된 PW 값입니다.';
+                return false;
+            } else {
+                document.getElementById('login_err_pwd').textContent = "";
+            }
+        }
+    </script>
 </body>
-<script>
-    let container = document.getElementById('map');
-    let options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 3
-    }
-    let map = new kakao.maps.Map(container, options);
-</script>
-<script type='module' src="main.js"></script>
 </html>
